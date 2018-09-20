@@ -25,7 +25,7 @@ class OnBoardLedInterface
   virtual void Set(uint8_t led_number, LightState state) = 0;
   virtual void Toggle(uint8_t led_number)                = 0;
   virtual void SetAll(uint8_t value)                     = 0;
-  virtual uint8_t GetStates(void)                        = 0;
+  virtual uint32_t GetStates(void)                        = 0;
 };
 
 class OnBoardLed : public OnBoardLedInterface
@@ -103,14 +103,14 @@ class OnBoardLed : public OnBoardLedInterface
   // This function will return the states of LED0-LED3, going from bit 0
   // represnting LED 0, to bit 3 representing LED3. Only the four least
   // significant bits will be used. The four most significant bits will be 0s.
-  uint8_t GetStates(void) override
+  uint32_t GetStates(void) override
   {
     uint32_t led_states = 0x0000;
     for (uint8_t i = 0; i < 4; i++)
     {
       led_states |= led[i].Read() << i;
     }
-    return static_cast<uint8_t>(led_states);
+    return led_states;
   }
 
  protected:
