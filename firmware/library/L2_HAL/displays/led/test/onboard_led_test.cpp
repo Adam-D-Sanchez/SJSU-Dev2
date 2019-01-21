@@ -12,9 +12,8 @@ TEST_CASE("OnBoardLed Test", "[onboard_led]")
   constexpr uint8_t kLedStatesExpectedSet    = 0b0000'0010;
   constexpr uint8_t kLedStatesExpectedToggle = 0b0000'0110;
   constexpr uint8_t kLedStatesExpectedSetAll = 0b0000'1111;
-  SECTION("Initialize")
-  {
-  // Creating an object to be tested. The object is then intialized.
+
+    // Creating an object to be tested. The object is then intialized.
   LPC_IOCON_TypeDef local_iocon;
   memset(&local_iocon, 0, sizeof(local_iocon));
   Pin::pin_map = reinterpret_cast<Pin::PinMap_t *>(&local_iocon);
@@ -34,6 +33,8 @@ TEST_CASE("OnBoardLed Test", "[onboard_led]")
 
   OnBoardLed led_control_test_unit;
   led_control_test_unit.Initialize();
+  SECTION("Initialize")
+  {
   }
   SECTION("Turning On and Off the LEDs.")
   {
